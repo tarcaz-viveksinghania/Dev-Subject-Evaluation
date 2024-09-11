@@ -1,27 +1,127 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+/* Global styles for the entire app */
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-color: white;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+header {
+  background-color: #333;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+}
+
+nav a {
+  color: white;
+  margin: 0 10px;
+  text-decoration: none;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
+
+footer {
+  background-color: #333;
+  color: white;
+  text-align: center;
+  padding: 10px;
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+}
+
+/* h1 {
+  font-size: 65px;
+}
+
+h2 {
+  font-size: 35px;
+  color: grey;
+}
+ */
+
+
+
+
+
+
+
+
+
+button[kind="secondary"] {
+  background-color: #36A9AE;
+  background-image: linear-gradient(#37ADB2, #329CA0);
+  border: none;
+  border-radius: 4px;
+  box-shadow: rgba(0, 0, 0, 0.12) 0 1px 1px;
+  color: #FFFFFF;
+  cursor: pointer;
+  display: block;
+  font-family: -apple-system, ".SFNSDisplay-Regular", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 17px;
+  line-height: 100%;
+  margin: 0;
+  outline: 0;
+  padding: 11px 15px 12px;
+  text-align: center;
+  transition: box-shadow .05s ease-in-out, opacity .05s ease-in-out, background-color .05s ease-in-out, color .05s ease-in-out;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+button[kind="secondary"]:hover {
+  box-shadow: none;
+  text-decoration: none;
+  transition-duration: .15s, .15s;
+}
+
+button[kind="secondary"]:active,
+button[kind="secondary"]:focus {
+  background-color: rgb(0, 0, 0);
+  background-image: none;
+  color: rgb(255, 255, 255) !important;
+  box-shadow: rgba(0, 0, 0, 0.15) 0 2px 4px inset, rgba(0, 0, 0, 0.4) 0 1px 1px;
+}
+
+button[kind="secondary"]:disabled {
+  cursor: not-allowed;
+  opacity: .6;
+}
+
+button[kind="secondary"]:disabled:active {
+  pointer-events: none;
+}
+
+button[kind="secondary"]:hover {
+  box-shadow: none;
+  color: #FFFFFF;
+}
+
+
+/* To remove scroll on the page */
+/* html, body {
+  overflow: hidden;
+} */
+
+.sidebar_button {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  background-color: #36A9AE;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  text-align: left;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.sidebar_button:hover {
+  background-color: black;
 }
