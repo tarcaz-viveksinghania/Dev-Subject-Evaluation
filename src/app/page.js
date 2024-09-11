@@ -31,11 +31,14 @@ export default function HomePage() {
 
       <div style={{ display: 'flex', justifyContent: 'space-around' }}>
         
-        <Link href="/upload" style={{ textDecoration: 'none' }}>
+        <Link href="/student" style={{ textDecoration: 'none' }}>
           <button kind="secondary">Upload Student's Answers Sheets</button>
         </Link>
 
-        <button kind="secondary">Upload Examiner's Answer Sheets</button>
+        <Link href="/examiner" style={{ textDecoration: 'none' }}>
+          <button kind="secondary">Upload Examiner's Answer Sheets</button>
+        </Link>
+
         <button kind="secondary">Obtain rich, personalised feedback</button>
       </div>
 

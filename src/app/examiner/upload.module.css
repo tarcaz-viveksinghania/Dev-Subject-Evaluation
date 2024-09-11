@@ -1,0 +1,134 @@
+.container {
+  padding: 20px;
+  text-align: center;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.title {
+  color: #333;
+  font-size: 45px;
+}
+
+.error {
+  color: red;
+}
+
+.button {
+  background-color: #0070f3;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: #005bb5;
+}
+
+.selectedFile {
+  margin-top: 20px;
+}
+
+.dropdownContainer {
+  margin-top: 20px;
+  text-align: left;
+}
+
+.dropdownContainer label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 18px;
+  color: #333;
+}
+
+.select {
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.pdfViewer {
+  margin-top: 20px;
+}
+
+.pdfFrame {
+  border: none;
+  border-radius: 8px;
+}
+
+
+
+
+
+ .form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.fileInputContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 400px;
+  position: relative;
+}
+
+.fileLabel {
+  display: inline-block;
+  background-color: #0070f3;
+  color: white;
+  padding: 12px 25px;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.fileLabel:hover {
+  background-color: #005bb5;
+}
+
+.fileInput {
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  cursor: pointer;
+}
+
+.button {
+  background-color: #0070f3;
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.button:hover {
+  background-color: #005bb5;
+  transform: translateY(-2px);
+}
+
+.button:active {
+  transform: translateY(0);
+}
+
+.error {
+  color: red;
+  font-size: 14px;
+}
