@@ -117,15 +117,172 @@
 // }
 
 
+// 'use client';
+// import { useState } from 'react';
+// import styles from './upload.module.css'; // Import the CSS module
+// import Link from 'next/link';
+
+// export default function UploadPage() {
+//   const [files, setFiles] = useState([]); // Array to store selected files
+//   const [fileURLs, setFileURLs] = useState([]); // Array to store URLs of uploaded files
+//   const [selectedFileIndex, setSelectedFileIndex] = useState(null); // Index of the selected file
+//   const [error, setError] = useState('');
+
+//   // Handle file input change
+//   const handleFileChange = (e) => {
+//     const selectedFiles = Array.from(e.target.files);
+//     const pdfFiles = selectedFiles.filter(file => file.type === 'application/pdf');
+
+//     if (pdfFiles.length > 0) {
+//       setFiles(pdfFiles); // Set the selected files to state
+//       setFileURLs(pdfFiles.map(file => URL.createObjectURL(file))); // Create URLs for preview
+//       setSelectedFileIndex(0); // Set default selected file to first
+//       setError('');
+//     } else {
+//       setFiles([]);
+//       setFileURLs([]);
+//       setSelectedFileIndex(null);
+//       setError('Only PDF files are allowed');
+//     }
+//   };
+
+//   // Handle PDF selection from dropdown
+//   const handleFileSelect = (e) => {
+//     setSelectedFileIndex(parseInt(e.target.value, 10)); // Update the selected file index
+//   };
+
+//   // Handle file upload
+//   // const handleSubmit = async (e) => {
+//   //   e.preventDefault();
+
+//   //   if (files.length === 0) {
+//   //     setError('No files selected');
+//   //     return;
+//   //   }
+
+//   //   // Normally, here you would submit the form data to a server
+//   //   const formData = new FormData();
+//   //   files.forEach(file => formData.append('answersheets', file)); // Append each file to FormData
+
+//   //   // Simulated logic to upload the files
+//   //   console.log('Files to upload:', files);
+
+//   //   // No need to reset the state here, we want to retain the uploaded files
+//   // };
+
+//   const handleSubmit = async (e) => {
+//     e.preventDefault();
+  
+//     if (files.length === 0) {
+//       setError('No files selected');
+//       return;
+//     }
+  
+//     const formData = new FormData();
+//     files.forEach(file => formData.append('answersheets', file));
+  
+//     try {
+//       const res = await fetch('/api/upload', {
+//         method: 'POST',
+//         body: formData,
+//       });
+  
+//       if (res.ok) {
+//         const result = await res.json();
+//         console.log(result.message); // Show success message
+//         setError(''); // Clear any previous errors
+//       } else {
+//         const errorResult = await res.json();
+//         setError(errorResult.message || 'Error uploading files');
+//       }
+//     } catch (err) {
+//       setError('Error uploading files');
+//     }
+//   };
+  
+  
+
+//   return (
+//     <div className={styles.container}>
+//       <h2 className={styles.title}>Upload Student's Answers</h2>
+//       <p style={{ textAlign: 'left', fontSize: '18px' }}>Choose PDF Files</p>
+
+//       {/* File upload form */}
+//       <form onSubmit={handleSubmit} className={styles.form}>
+//         <div className={styles.fileInputContainer}>
+//           <label htmlFor="fileUpload" className={styles.fileLabel}>Choose PDF files</label>
+//           <input
+//             type="file"
+//             id="fileUpload"
+//             onChange={handleFileChange}
+//             accept=".pdf"
+//             multiple
+//             className={styles.fileInput}
+//           />
+//           {error && <p className={styles.error}>{error}</p>}
+
+//           <button type="submit" className={styles.button}>
+//             Upload
+//           </button>
+//         </div>
+//       </form>
+
+//       {/* Dropdown to select uploaded PDF */}
+//       {files.length > 0 && (
+//         <div className={styles.dropdownContainer}>
+//           <label htmlFor="pdfSelect">Select a PDF to view:</label>
+//           <select id="pdfSelect" onChange={handleFileSelect} value={selectedFileIndex || ''}>
+//             {selectedFileIndex === null && <option value="" disabled>Select a PDF</option>}
+//             {files.map((file, index) => (
+//               <option key={index} value={index}>
+//                 {file.name}
+//               </option>
+//             ))}
+//           </select>
+//         </div>
+//       )}
+
+//       {/* PDF Viewer */}
+//       {selectedFileIndex !== null && fileURLs[selectedFileIndex] && (
+//         <div className={styles.pdfViewer}>
+//           <h3>Preview of the selected PDF:</h3>
+//           <iframe
+//             src={fileURLs[selectedFileIndex]}
+//             width="100%"
+//             height="500px"
+//             className={styles.pdfFrame}
+//           />
+//         </div>
+//       )}
+
+//       {/* Navigation buttons */}
+//       <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+//         <Link href="/" style={{ textDecoration: 'none' }}>
+//           <button kind="secondary">Go Home</button>
+//         </Link>
+//         <Link href="/examiner" style={{ textDecoration: 'none' }}>
+//           <button kind="secondary">Next</button>
+//         </Link>
+//       </div>
+//     </div>
+//   );
+// }
+
+
+
+
+
 'use client';
 import { useState } from 'react';
-import styles from './upload.module.css'; // Import the CSS module
+import styles from './upload.module.css';
 import Link from 'next/link';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function UploadPage() {
-  const [files, setFiles] = useState([]); // Array to store selected files
-  const [fileURLs, setFileURLs] = useState([]); // Array to store URLs of uploaded files
-  const [selectedFileIndex, setSelectedFileIndex] = useState(null); // Index of the selected file
+  const [files, setFiles] = useState([]);
+  const [fileURLs, setFileURLs] = useState([]);
+  const [selectedFileIndex, setSelectedFileIndex] = useState(null);
   const [error, setError] = useState('');
 
   const handleFileChange = (e) => {
@@ -134,9 +291,13 @@ export default function UploadPage() {
 
     if (pdfFiles.length > 0) {
       setFiles(pdfFiles);
-      setFileURLs(pdfFiles.map(file => URL.createObjectURL(file)));
-      setSelectedFileIndex(0); // Set the default selected file to the first one
+      const urls = pdfFiles.map(file => URL.createObjectURL(file));
+      setFileURLs(urls);
+      setSelectedFileIndex(0);
       setError('');
+      
+      // Store file URLs in localStorage
+      localStorage.setItem('uploadedPDFs', JSON.stringify(urls));
     } else {
       setFiles([]);
       setFileURLs([]);
@@ -149,56 +310,33 @@ export default function UploadPage() {
     setSelectedFileIndex(parseInt(e.target.value, 10));
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (files.length === 0) {
-      setError('No files selected');
-      return;
-    }
-
-    const formData = new FormData();
-    files.forEach(file => formData.append('answersheets', file)); // Append each file to FormData
-
-    // Logic to upload the files (simulated here)
-    console.log('Files to upload:', files);
-
-    // Reset file input after submission
-    setFiles([]);
-    setFileURLs([]);
-    setSelectedFileIndex(null);
-  };
-
   return (
     <div className={styles.container}>
       <h2 className={styles.title}>Upload Student's Answers</h2>
       <p style={{ textAlign: 'left', fontSize: '18px' }}>Choose PDF Files</p>
 
-      <form onSubmit={handleSubmit} className={styles.form}>
-        <div className={styles.fileInputContainer}>
-          <label htmlFor="fileUpload" className={styles.fileLabel}>Choose PDF files</label>
-          <input
-            type="file"
-            id="fileUpload"
-            onChange={handleFileChange}
-            accept=".pdf"
-            multiple
-            className={styles.fileInput}
-          />
-        </div>
-        
+      <div className={styles.fileInputContainer}>
+        <label htmlFor="fileUpload" className={styles.fileLabel}>Choose PDF files</label>
+        <input
+          type="file"
+          id="fileUpload"
+          onChange={handleFileChange}
+          accept=".pdf"
+          multiple
+          className={styles.fileInput}
+        />
         {error && <p className={styles.error}>{error}</p>}
-        
-        <button type="submit" className={styles.button}>
-          Upload
-        </button>
-      </form>
+      </div>
 
+      {/* Toast notification */}
+      <ToastContainer />
 
+      {/* Dropdown to select uploaded PDF */}
       {files.length > 0 && (
         <div className={styles.dropdownContainer}>
           <label htmlFor="pdfSelect">Select a PDF to view:</label>
           <select id="pdfSelect" onChange={handleFileSelect} value={selectedFileIndex || ''}>
-            <option value="" disabled>Select a PDF</option>
+            {selectedFileIndex === null && <option value="" disabled>Select a PDF</option>}
             {files.map((file, index) => (
               <option key={index} value={index}>
                 {file.name}
@@ -208,6 +346,7 @@ export default function UploadPage() {
         </div>
       )}
 
+      {/* PDF Preview */}
       {selectedFileIndex !== null && fileURLs[selectedFileIndex] && (
         <div className={styles.pdfViewer}>
           <h3>Preview of the selected PDF:</h3>
@@ -220,15 +359,15 @@ export default function UploadPage() {
         </div>
       )}
 
-        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-          <Link href="/" style={{ textDecoration: 'none' }}>
-            <button kind="secondary">Go Home</button>
-          </Link>
-          <Link href="/examiner" style={{ textDecoration: 'none' }}>
-            <button kind="secondary">Next</button>
-          </Link>
-        </div>
-
+      {/* Navigation buttons */}
+      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+        <Link href="/" style={{ textDecoration: 'none' }}>
+          <button kind="secondary">Go Home</button>
+        </Link>
+        <Link href="/examiner" style={{ textDecoration: 'none' }}>
+          <button kind="secondary">Next</button>
+        </Link>
+      </div>
     </div>
   );
 }
