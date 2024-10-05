@@ -1,4 +1,254 @@
 /* Global styles for the entire app */
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+@import '~react-toastify/dist/ReactToastify.min.css';
+
+html{
+  background-color: rgb(255, 255, 255);
+}
+head{
+  background: rgb(161, 229, 206);
+}
+
+
+/* This works too */
+.landingpage{
+  color: forestgreen;  
+  background: #000;
+  
+}
+:root{
+  --toastify-icon-color-success: rgb(144, 207, 238);
+}
+.Toastify__progress-bar {
+  color:rgb(144, 207, 238);
+  background:#7d77cb;
+}
+
+.Toastify__toast-icon {
+  /* color:rgb(144, 207, 238);
+  background:rgb(144, 27, 238); */
+  --toastify-color-info: #cbaf77 !important;
+}
+.Toastify__toast-theme--colored.Toastify__toast--info {
+  background-color: #b24110 !important;
+  --toastify-color-info: #bfbdd5 !important;
+}
+
+.Toastify__toast-theme--colored.Toastify__toast--success {
+  color: #2418cc !important;
+  background: #7d77cb !important;
+  --toastify-color-info: #7d77cb !important;
+}
+
+
+
+/* .HomeScreen{
+  flex:auto;
+  width: 100%;
+  background-color: rgb(189, 139, 139);
+} */
+
+.HomeLeft{
+  height: 94%;
+  /* background: #F2F0FFFF;  */
+  background: #F1FBFEFF; /* secondary-100 */
+  
+}
+
+.UserBox{
+  /* height: 121px;  */
+  background: #FFFFFFFF; /* white */
+  border-radius: 12px; /* border-m */
+  border-width: 1px; 
+  border-color: #D8D2FEFF; /* secondary-200 */
+  border-style: solid;
+}
+
+/* from visily */
+.Avatar{
+  background: #8775FDFF; /* secondary-500 */
+}
+/* buttonUpgrade 16 */
+.buttonUpgrade {
+  position: absolute; 
+  /* top: 69px; 
+  left: 16px;  */
+  /* width: 211px; 
+  height: 32px;  */
+  padding: 0 8px; 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  /* font-family: Wix Madefor Text;  */
+  font-size: 12px; 
+  font-weight: 400; 
+  line-height: 20px; 
+  color: #8775FDFF; /* secondary-500 */
+  background: #F2F0FFFF; /* secondary-100 */
+  opacity: 1; 
+  border: none; 
+  border-radius: 9px; /* border-s */
+  gap: 4px; 
+}
+.buttonUpgrade .icon {
+  width: 12px; 
+  height: 12px; 
+  fill: #8775FDFF; /* secondary-500 */
+}
+/* Hover */
+.buttonUpgrade:hover {
+  color: #8775FDFF; /* secondary-500 */
+  background: #E5E1FFFF; /* secondary-150 */
+}
+/* Pressed */
+.buttonUpgrade:hover:active {
+  color: #8775FDFF; /* secondary-500 */
+  background: #D8D2FEFF; /* secondary-200 */
+}
+/* Disabled */
+.buttonUpgrade:disabled {
+  opacity: 0.4; 
+}
+
+/* input */
+.divinput input {
+  background: #FFFFFFFF; /* white */
+  border-color: #9095A0FF; /* neutral-550 */
+}
+/* hover */
+.divinput input:hover {
+  background: #FFFFFFFF; /* white */
+  border-color: #D8D2FEFF; /* neutral-550 */
+}
+/* focused */
+.divinput input:focused {
+  background: #FFFFFFFF; /* white */
+  border-color: #8775FDFF; /* secondary-500 */
+  ; /* neutral-500 */
+}
+/* disabled */
+.divinput input:disabled {
+  background: #FFFFFFFF; /* white */
+  border-color: #9095A0FF; /* neutral-500 */
+}
+
+/* .divinput :disabled + .icon, .divinput :disabled + .icon + .icon { */
+  /* fill: #BCC1CAFF; neutral-400 */
+/* } */
+
+.SuggestionContainer {
+  /* position: absolute;  */
+  /* top: 377px;  */
+  /* left: 546px;  */
+  /* width: 648px;  */
+  /* height: 72px;  */
+  background: #FFFFFFFF; /* white */
+  /* border-radius: 12px; border-m */
+  border-width: 1px; 
+  border-color: #F3F4F6FF; /* neutral-200 */
+  border-style: solid; 
+}
+
+/* Container 22 */
+
+.SuggestionContainer:hover{
+  /* width: 648px;  */
+  /* height: 72px;  */
+  background: #FFFFFFFF; /* white */
+  /* border-radius: 12px; border-m */
+  border-width: 0.5px; 
+  border-color: #8775FDFF; /* secondary-500 */
+  border-style: solid; 
+  box-shadow: 0px 0px 1px #171a1f, 0px 0px 1px #171a1f; /* shadow-xs */
+}
+
+/* Container 23 */
+.SuggestionContainerIcon {
+  /* position: absolute;  */
+  /* top: 6px; 
+  left: 6px; 
+  width: 88px; 
+  height: 60px;  */
+
+  color: #62D0F4FF; 
+  background: #F1FBFEFF; /* tertiary3-100 */
+  /* info-500 */
+  /* border-radius: 9px; border-s */
+}
+.SuggestionContainerIcon:hover {
+  background: #379AE6FF;
+  color: #FFFFFFFF; /* white */
+}
+
+.ArrowIcon{
+  /* white */
+  color: #FFFFFFFF; 
+  /* color:#379AE6FF; */
+}
+  
+/* For Webkit-based browsers (Chrome, Safari and Opera) */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* For IE, Edge and Firefox */
+.scrollbar-hide {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+/* -------------------------------------------------------------------- */
+.text_header {
+  position: absolute; 
+  top: 66px; 
+  left: 76px; 
+  font-family: Outfit; /* Heading */
+  font-size: 40px; 
+  font-weight: 700; 
+  line-height: 56px; 
+  color: #171A1FFF; /* neutral-900 */
+}
+
+/* Button 6 */
+.button_login {
+  position: absolute; 
+  top: 256px; 
+  left: 96px; 
+  width: 369px; 
+  height: 44px; 
+  padding: 0 16px; 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  font-family: Wix Madefor Text; 
+  font-size: 16px; 
+  font-weight: 400; 
+  line-height: 26px; 
+  color: #FFFFFFFF; /* white */
+  background: #171A1FFF; /* neutral-900 */
+  opacity: 1; 
+  border: none; 
+  border-radius: 12px; /* border-m */
+}
+/* Hover */
+.button_login:hover {
+  color: #FFFFFFFF; /* white */
+  background: #262A33FF; /* neutral-750 */
+}
+/* Pressed */
+.button_login:hover:active {
+  color: #FFFFFFFF; /* white */
+  background: #323842FF; /* neutral-700 */
+}
+/* Disabled */
+.button_login:disabled {
+  opacity: 0.4; 
+}
+
+
 
 body {
   margin: 0;
@@ -124,4 +374,59 @@ button[kind="secondary"]:hover {
 
 .sidebar_button:hover {
   background-color: black;
+}
+
+
+
+
+/* src/app/login/login.css */
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: white;
+}
+
+.login-box {
+  background-color: white;
+  padding: 40px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  width: 300px;
+  text-align: center;
+}
+
+.login-box h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.login-box input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.login-box button {
+  width: 100%;
+  padding: 10px;
+  background-color: #36a9ae;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.login-box button:hover {
+  background-color: #2e8b92;
+}
+
+.error-message {
+  color: red;
+  margin-top: 10px;
+  font-size: 14px;
 }

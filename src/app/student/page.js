@@ -285,6 +285,11 @@ export default function UploadPage() {
   const [selectedFileIndex, setSelectedFileIndex] = useState(null);
   const [error, setError] = useState('');
 
+
+
+
+
+
   const handleFileChange = (e) => {
     const selectedFiles = Array.from(e.target.files);
     const pdfFiles = selectedFiles.filter(file => file.type === 'application/pdf');
@@ -305,6 +310,10 @@ export default function UploadPage() {
       setError('Only PDF files are allowed');
     }
   };
+
+
+
+
 
   const handleFileSelect = (e) => {
     setSelectedFileIndex(parseInt(e.target.value, 10));
@@ -328,8 +337,35 @@ export default function UploadPage() {
         {error && <p className={styles.error}>{error}</p>}
       </div>
 
-      {/* Toast notification */}
-      <ToastContainer />
+
+
+
+
+
+      {/* OR separator */}
+      <div style={{ display: 'flex', alignItems: 'center', textAlign: 'center', margin: '20px 0' }}>
+        <hr style={{ flexGrow: 1, border: '0.2px solid lightgrey' }} />
+        <span style={{ margin: '0 10px' }}>OR</span>
+        <hr style={{ flexGrow: 1, border: '0.2px solid lightgrey' }} />
+      </div>
+
+
+
+
+      {/* Capture PDF */}
+      <div style={{ display: 'flex', justifyContent: 'center' }}>
+        <Link href="/scan" >
+          <button className={styles.bluebutton}>Scan</button>
+        </Link>
+      </div>
+
+
+
+
+
+
+
+
 
       {/* Dropdown to select uploaded PDF */}
       {files.length > 0 && (
@@ -346,6 +382,10 @@ export default function UploadPage() {
         </div>
       )}
 
+
+
+
+
       {/* PDF Preview */}
       {selectedFileIndex !== null && fileURLs[selectedFileIndex] && (
         <div className={styles.pdfViewer}>
@@ -359,15 +399,22 @@ export default function UploadPage() {
         </div>
       )}
 
+
+
+
+
       {/* Navigation buttons */}
       <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-        <Link href="/" style={{ textDecoration: 'none' }}>
+        <Link href="/home" style={{ textDecoration: 'none' }}>
           <button kind="secondary">Go Home</button>
         </Link>
         <Link href="/examiner" style={{ textDecoration: 'none' }}>
           <button kind="secondary">Next</button>
         </Link>
       </div>
+
+
+      
     </div>
   );
 }

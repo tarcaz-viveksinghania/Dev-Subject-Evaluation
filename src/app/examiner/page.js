@@ -512,8 +512,239 @@
 
 
 
+// 'use client';
+// import { useState, useEffect } from 'react';
+// import Papa from 'papaparse';
+// import styles from './upload.module.css';
+// import Link from 'next/link';
+
+// export default function UploadPage() {
+//   const [files, setFiles] = useState([]); // Array to store selected files
+//   const [csvData, setCsvData] = useState([]); // Array to store CSV data
+//   const [error, setError] = useState('');
+//   const [selectedQuestionPaper, setSelectedQuestionPaper] = useState(''); // State to track selected question paper
+
+//   const questionPapers = [
+//     { id: 1, name: 'Math Paper 1' },
+//     { id: 2, name: 'Science Paper 1' },
+//     { id: 3, name: 'History Paper 1' },
+//   ];
+
+
+
+
+
+//   // Load saved state from localStorage (if any) on page load
+//   useEffect(() => {
+//     const savedQuestionPaper = localStorage.getItem('selectedQuestionPaper');
+//     const savedCsvData = localStorage.getItem('csvData');
+//     const savedFiles = localStorage.getItem('files');
+  
+//     if (savedQuestionPaper) {
+//       setSelectedQuestionPaper(savedQuestionPaper);
+//     } else {
+//       setSelectedQuestionPaper(''); // Ensure dropdown starts with no selection
+//     }
+  
+//     // If you don't want to auto-load files, don't retrieve savedFiles from localStorage
+//     if (savedCsvData) setCsvData(JSON.parse(savedCsvData));
+//   }, []);
+  
+
+
+
+
+
+//   const handleFileChange = (e) => {
+//     const selectedFiles = Array.from(e.target.files);
+//     const csvFiles = selectedFiles.filter(file => file.type === 'text/csv');
+
+//     if (csvFiles.length > 0) {
+//       setFiles(csvFiles);
+//       setError('');
+
+//       const file = csvFiles[0];
+//       Papa.parse(file, {
+//         complete: (result) => {
+//           setCsvData(result.data);
+//           // Save CSV data and files to localStorage
+//           localStorage.setItem('csvData', JSON.stringify(result.data));
+//           localStorage.setItem('files', JSON.stringify(csvFiles));
+//         },
+//         header: true,
+//       });
+//     } else {
+//       setFiles([]);
+//       setCsvData([]);
+//       setError('Only CSV files are allowed');
+//     }
+//   };
+
+
+
+
+
+
+//   const handleSubmit = (e) => {
+//     e.preventDefault();
+//     if (files.length === 0) {
+//       setError('No files selected');
+//       return;
+//     }
+  
+//     // Simulate upload logic and clear state after submission
+//     setFiles([]);
+//     setCsvData([]);
+//     setSelectedQuestionPaper('');
+  
+//     // Clear localStorage after submission
+//     localStorage.removeItem('files');
+//     localStorage.removeItem('csvData');
+//     localStorage.removeItem('selectedQuestionPaper');
+//   };
+  
+
+
+
+
+
+//   const handleQuestionPaperChange = async (e) => {
+//     const selectedPaper = e.target.value;
+//     setSelectedQuestionPaper(selectedPaper);
+    
+//     // Save the selected question paper to localStorage
+//     localStorage.setItem('selectedQuestionPaper', selectedPaper);
+  
+//     try {
+//       const response = await fetch(`/api/getCsv?paperName=${encodeURIComponent(selectedPaper)}`);
+//       const data = await response.json();
+//       setCsvData(data);
+//       // Save fetched CSV data to localStorage
+//       localStorage.setItem('csvData', JSON.stringify(data));
+//     } catch (error) {
+//       setError('Failed to fetch the CSV file');
+//     }
+//   };
+
+
+
+
+
+//   return (
+//     <div className={styles.container}>
+//       <h2 className={styles.title}>Upload Examiner's Answers</h2>
+
+
+
+
+//       {/* Dropdown to select existing question paper */}
+//       <div className={styles.dropdownContainer}>
+//         <label htmlFor="questionPaperSelect">Select Question Paper:</label>
+//         <select
+//           id="questionPaperSelect"
+//           value={selectedQuestionPaper}
+//           onChange={handleQuestionPaperChange}
+//           className={styles.dropdown}
+//         >
+//           <option value="" disabled>Select a question paper</option>
+//           {questionPapers.map((paper) => (
+//             <option key={paper.id} value={paper.name}>
+//               {paper.name}
+//             </option>
+//           ))}
+//         </select>
+//       </div>
+
+
+
+
+//       {/* OR separator */}
+//       <div style={{ display: 'flex', alignItems: 'center', textAlign: 'center', margin: '20px 0' }}>
+//         <hr style={{ flexGrow: 1, border: '0.2px solid lightgrey' }} />
+//         <span style={{ margin: '0 10px' }}>OR</span>
+//         <hr style={{ flexGrow: 1, border: '0.2px solid lightgrey' }} />
+//       </div>
+
+
+
+
+//       {/* File upload section */}
+//       <p style={{ textAlign: 'left', fontSize: '18px' }}>Upload CSV Files</p>
+//       <form onSubmit={handleSubmit} className={styles.form}>
+//         <div className={styles.fileInputContainer}>
+//           <label htmlFor="fileUpload" className={styles.fileLabel}>Choose CSV files</label>
+//           <input
+//             type="file"
+//             id="fileUpload"
+//             onChange={handleFileChange}
+//             accept=".csv"
+//             multiple
+//             className={styles.fileInput}
+//           />
+//           {error && <p className={styles.error}>{error}</p>}
+//           <button type="submit" className={styles.button}>
+//             Upload
+//           </button>
+//         </div>
+//       </form>
+
+
+
+
+
+//       {/* CSV preview */}
+//       {csvData.length > 0 && (
+//         <div className={styles.csvPreview}>
+//           <h3>CSV File Preview:</h3>
+//           <div className={styles.tableContainer}>
+//             <table className={styles.csvTable}>
+//               <thead>
+//                 <tr>
+//                   {Object.keys(csvData[0]).map((header, index) => (
+//                     <th key={index}>{header}</th>
+//                   ))}
+//                 </tr>
+//               </thead>
+//               <tbody>
+//                 {csvData.map((row, rowIndex) => (
+//                   <tr key={rowIndex}>
+//                     {Object.values(row).map((value, colIndex) => (
+//                       <td key={colIndex}>{value}</td>
+//                     ))}
+//                   </tr>
+//                 ))}
+//               </tbody>
+//             </table>
+//           </div>
+//         </div>
+//       )}
+
+
+
+
+
+//       {/* Navigation buttons */}
+//       <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+//         <Link href="/student" style={{ textDecoration: 'none' }}>
+//           <button kind="secondary">Back</button>
+//         </Link>
+//         <Link href="/evaluate" style={{ textDecoration: 'none' }}>
+//           <button kind="secondary">Evaluate</button>
+//         </Link>
+//       </div>
+
+
+
+
+//     </div>
+//   );
+// }
+
+
+
+
 'use client';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Papa from 'papaparse';
 import styles from './upload.module.css';
 import Link from 'next/link';
@@ -523,6 +754,7 @@ export default function UploadPage() {
   const [csvData, setCsvData] = useState([]); // Array to store CSV data
   const [error, setError] = useState('');
   const [selectedQuestionPaper, setSelectedQuestionPaper] = useState(''); // State to track selected question paper
+  const fileInputRef = useRef(null); // Reference to file input element
 
   const questionPapers = [
     { id: 1, name: 'Math Paper 1' },
@@ -534,11 +766,13 @@ export default function UploadPage() {
   useEffect(() => {
     const savedQuestionPaper = localStorage.getItem('selectedQuestionPaper');
     const savedCsvData = localStorage.getItem('csvData');
-    const savedFiles = localStorage.getItem('files');
 
-    if (savedQuestionPaper) setSelectedQuestionPaper(savedQuestionPaper);
+    if (savedQuestionPaper) {
+      setSelectedQuestionPaper(savedQuestionPaper);
+    } else {
+      setSelectedQuestionPaper(''); // Ensure dropdown starts with no selection
+    }
     if (savedCsvData) setCsvData(JSON.parse(savedCsvData));
-    if (savedFiles) setFiles(JSON.parse(savedFiles));
   }, []);
 
   const handleFileChange = (e) => {
@@ -553,9 +787,8 @@ export default function UploadPage() {
       Papa.parse(file, {
         complete: (result) => {
           setCsvData(result.data);
-          // Save CSV data and files to localStorage
+          // Save CSV data to localStorage
           localStorage.setItem('csvData', JSON.stringify(result.data));
-          localStorage.setItem('files', JSON.stringify(csvFiles));
         },
         header: true,
       });
@@ -568,16 +801,26 @@ export default function UploadPage() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (files.length === 0) {
-      setError('No files selected');
+    if (files.length === 0 && !selectedQuestionPaper) {
+      setError('No files or question paper selected');
       return;
     }
-
+  
     // Clear state after submission (simulate upload logic)
     setFiles([]);
     setCsvData([]);
-    setSelectedQuestionPaper('');
+    setSelectedQuestionPaper('');  // Reset the dropdown selection
+  
+    // Clear file input field
+    if (fileInputRef.current) {
+      fileInputRef.current.value = '';  // Reset the file input element
+    }
+  
+    // Clear localStorage after submission
+    localStorage.removeItem('csvData');
+    localStorage.removeItem('selectedQuestionPaper');
   };
+  
 
   const handleQuestionPaperChange = async (e) => {
     const selectedPaper = e.target.value;
@@ -597,6 +840,13 @@ export default function UploadPage() {
     }
   };
 
+  useEffect(() => {
+    // Clear storage on component load (if desired)
+    localStorage.removeItem('csvData');
+    localStorage.removeItem('selectedQuestionPaper');
+  }, []);
+  
+
   return (
     <div className={styles.container}>
       <h2 className={styles.title}>Upload Examiner's Answers</h2>
@@ -610,7 +860,7 @@ export default function UploadPage() {
           onChange={handleQuestionPaperChange}
           className={styles.dropdown}
         >
-          <option value="" disabled>Select a question paper</option>
+          <option value="">Select a question paper</option>
           {questionPapers.map((paper) => (
             <option key={paper.id} value={paper.name}>
               {paper.name}
@@ -619,12 +869,18 @@ export default function UploadPage() {
         </select>
       </div>
 
+
+
+
       {/* OR separator */}
       <div style={{ display: 'flex', alignItems: 'center', textAlign: 'center', margin: '20px 0' }}>
         <hr style={{ flexGrow: 1, border: '0.2px solid lightgrey' }} />
         <span style={{ margin: '0 10px' }}>OR</span>
         <hr style={{ flexGrow: 1, border: '0.2px solid lightgrey' }} />
       </div>
+
+
+
 
       {/* File upload section */}
       <p style={{ textAlign: 'left', fontSize: '18px' }}>Upload CSV Files</p>
@@ -634,6 +890,7 @@ export default function UploadPage() {
           <input
             type="file"
             id="fileUpload"
+            ref={fileInputRef} // Reference to the file input
             onChange={handleFileChange}
             accept=".csv"
             multiple
@@ -645,6 +902,9 @@ export default function UploadPage() {
           </button>
         </div>
       </form>
+
+
+
 
       {/* CSV preview */}
       {csvData.length > 0 && (
@@ -673,6 +933,9 @@ export default function UploadPage() {
         </div>
       )}
 
+
+
+
       {/* Navigation buttons */}
       <div style={{ display: 'flex', justifyContent: 'space-between' }}>
         <Link href="/student" style={{ textDecoration: 'none' }}>
@@ -682,6 +945,10 @@ export default function UploadPage() {
           <button kind="secondary">Evaluate</button>
         </Link>
       </div>
+
+
+
+
     </div>
   );
 }
